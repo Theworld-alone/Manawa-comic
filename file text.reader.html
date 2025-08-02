@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Read Comic - Manawa</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-900 text-white">
+
+  <header class="bg-purple-700 p-4 text-center text-xl font-bold">
+    📖 Reading Comic
+  </header>
+
+  <main class="p-4" id="comicPages">
+    <!-- Pages will be inserted here using JavaScript -->
+  </main>
+
+  <footer class="bg-gray-800 text-center p-3 text-sm">
+    © 2025 Manawa Comics
+  </footer>
+
+  <script>
+    // Dummy comic data
+    const comics = {
+      naruto: [
+        "https://i.imgur.com/3Fj2QZz.jpg",
+        "https://i.imgur.com/RHk9Y3j.jpg",
+        "https://i.imgur.com/yq3z9VW.jpg"
+      ],
+      onepiece: [
+        "https://i.imgur.com/sDdc9Mk.jpg",
+        "https://i.imgur.com/HZyRvV3.jpg",
+        "https://i.imgur.com/WqMpkn5.jpg"
+      ]
+    };
+
+    // Get comic name from URL
+    const params = new URLSearchParams(window.location.search);
+    const comicName = params.get("comic");
+
+    const pagesContainer = document.getElementById("comicPages");
+
+    if (comics[comicName]) {
+      comics[comicName].forEach(url => {
+        const img = document.createElement("img");
+        img.src = url;
+        img.alt = comicName;
+        img.className = "w-full mb-4 rounded shadow";
+        pagesContainer.appendChild(img);
+      });
+    } else {
+      pagesContainer.innerHTML = "<p class='text-center text-red-400'>Comic not found.</p>";
+    }
+  </script>
+</body>
+</html>
